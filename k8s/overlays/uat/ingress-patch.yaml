@@ -1,0 +1,8 @@
+- op: add
+  path: /metadata/annotations
+  value:
+    appgw.ingress.kubernetes.io/appgw-ssl-certificate: autocare-uat-tls
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+- op: add
+  path: /spec/rules/0/host
+  value: uat.autocare.local
