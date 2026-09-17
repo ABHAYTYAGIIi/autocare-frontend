@@ -93,6 +93,9 @@ jobs:
     if: github.event_name == 'push'
     runs-on: autocare-frontend
 
+    environment:
+      name: ${{ github.ref_name == 'main' && 'prod' || github.ref_name }}
+
     outputs:
       environment: ${{ steps.environment.outputs.environment }}
       image: ${{ steps.image.outputs.image }}
