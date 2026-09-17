@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: autocare-frontend
-  namespace: dev
 spec:
   replicas: 1
   selector:
@@ -15,7 +14,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: acrazureproject.azurecr.io/autocare-frontend:v1
+          image: acrazureproject.azurecr.io/autocare-frontend
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           readinessProbe:
