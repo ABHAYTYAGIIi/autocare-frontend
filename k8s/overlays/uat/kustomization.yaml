@@ -9,4 +9,4 @@ resources:
 images:
   - name: acrazureproject.azurecr.io/autocare-frontend
     newName: acrazureproject.azurecr.io/autocare-frontend
-    newTag: v1
+    newTag: v2
