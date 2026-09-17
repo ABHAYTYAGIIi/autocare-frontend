@@ -224,12 +224,12 @@ jobs:
   # STAGE 5 - VERIFY
   # ============================================================
   verify:
-  name: Stage 5 - Verify
-  needs: deploy
-  runs-on: autocare-frontend
+    name: Stage 5 - Verify
+    needs: deploy
+    runs-on: autocare-frontend
 
-  environment:
-    name: ${{ needs.deploy.outputs.environment }}
+    environment:
+      name: ${{ needs.deploy.outputs.environment }}
 
     steps:
       - name: Azure login
