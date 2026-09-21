@@ -4,7 +4,7 @@ metadata:
   name: autocare-frontend
   namespace: uat
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: autocare-frontend
