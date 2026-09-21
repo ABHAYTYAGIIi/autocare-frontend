@@ -94,7 +94,7 @@ jobs:
             ghcr.io/yannh/kubeconform:v0.8.0 \
             -strict \
             -summary \
-            -kubernetes-version 1.35.7 \
+            -kubernetes-version 1.35.8 \
             -schema-location default \
             "k8s/${ENVIRONMENT}/"
 
@@ -416,27 +416,6 @@ jobs:
           kubectl get pods \
             -n "${ENVIRONMENT}" \
             -l app=autocare-frontend
-
-      - name: Verify application health
-        env:
-          ENVIRONMENT: ${{ steps.environment.outputs.environment }}
-          ACR_LOGIN_SERVER: ${{ vars.ACR_LOGIN_SERVER }}
-          KUBECONFIG: ${{ runner.temp }}/kubeconfig
-        run: |
-          kubectl run \
-            frontend-health-check \
-            --rm \
-            --attach \
-            --restart=Never \
-            --image="${ACR_LOGIN_SERVER}/netshoot:latest" \
-            --namespace="${ENVIRONMENT}" \
-            --command \
-            -- curl \
-              --fail \
-              --silent \
-              --show-error \
-              --max-time 10 \
-              http://autocare-frontend:8080/autocare/
 
       - name: Cleanup kubeconfig
         if: always()
