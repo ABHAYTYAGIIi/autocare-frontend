@@ -3,10 +3,14 @@ kind: Ingress
 metadata:
   name: autocare
   namespace: prod
+  annotations:
+    appgw.ingress.kubernetes.io/appgw-ssl-certificate: autocare-prod-tls
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: azure-application-gateway
   rules:
-    - http:
+    - host: prod.autocare.local
+      http:
         paths:
           - path: /autocare/
             pathType: Prefix
