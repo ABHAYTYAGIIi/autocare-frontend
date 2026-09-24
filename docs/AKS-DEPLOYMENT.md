@@ -239,3 +239,5 @@ Git push
 ```
 
 Environment-specific configuration and image references should eventually be managed by Kustomize rather than manually editing deployment manifests.
+
+A change
