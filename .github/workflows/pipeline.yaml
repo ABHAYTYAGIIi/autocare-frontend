@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -45,6 +47,11 @@ jobs:
       - name: Build frontend
         run: |
           npm run build
+
+      - name: SonarQube Cloud scan
+        uses: SonarSource/sonarqube-scan-action@v8.3.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
   k8s-validation:
@@ -220,6 +227,16 @@ jobs:
           docker tag \
             "${LOCAL_IMAGE}" \
             "${IMAGE}"
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'image'
+          image-ref: ${{ steps.image.outputs.image }}
+          severity: 'HIGH,CRITICAL'
+          vuln-type: 'os,library'
+          ignore-unfixed: 'true'
+          exit-code: '1'
 
       - name: Push Docker image
         env:
