@@ -4,13 +4,11 @@ metadata:
   name: autocare
   namespace: dev
   annotations:
-    appgw.ingress.kubernetes.io/appgw-ssl-certificate: autocare-dev-tls
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/app-root: /autocare/
 spec:
-  ingressClassName: azure-application-gateway
+  ingressClassName: nginx
   rules:
-    - host: dev.autocare.local
-      http:
+    - http:
         paths:
           - path: /autocare/
             pathType: Prefix
