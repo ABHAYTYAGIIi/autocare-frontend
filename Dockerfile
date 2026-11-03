@@ -16,11 +16,10 @@ RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:alpine
 
-RUN apk upgrade --no-cache
-
 ARG API_UPSTREAM=http://autocare-api:3000
 
 USER root
+RUN apk upgrade --no-cache
 
 COPY --from=build /app/dist /usr/share/nginx/html/autocare
 
